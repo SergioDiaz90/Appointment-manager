@@ -1,0 +1,16 @@
+{
+  "name": "gestor-de-citas",
+  "version": "1.0.0",
+  "description": "Sistema de gestión de citas médicas para médicos independientes.",
+  "main": "medicina6.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luisa Herrera, Daniel Farias",
+  "license": "MIT",
+  "keywords": [
+    "website",
+    "citas",
+    "webpack"
+  ]
+}

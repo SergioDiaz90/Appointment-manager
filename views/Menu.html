@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/medicina5.css">
+    <script defer src="../js/medicina6.js" type="module"></script>
+    <title>Gestión de Citas Médicas</title>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <div id="loginSection">
+            <h1>Gestión de Citas Médicas</h1>
+            <img src="../assets/img/Logo.png" alt="Logo del Hospital" class="logo">
+            <h2>Iniciar Sesión</h2>
+            <label for="empresaName">Nombre de la Empresa:</label>
+            <input type="text" id="empresaName" required>
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" required>
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" required>
+            <button type="button" id="loginButton">Ingresar</button>
+        </div>        
+    </div>
+
+    <section class="dashboard" id="dashboard">
+        <div class="menu">
+            <div class="menu--profileImg">
+                <picture>
+                    <img src="../assets/img/profile.jpg" alt="Foto de perfil">
+                </picture>
+                <h4>Sano mataenfermos</h4>
+            </div>
+            <nav class="menu--list">
+                <ul id="nav-menu">
+                    <li class="menu--list-item">
+                        <picture class="icon">
+                            <img src="../assets/icons/casa.webp" alt="inicio">
+                        </picture>
+                        <span>Inicio</span>
+                    </li>
+                    <li class="menu--list-item">
+                        <picture class="icon">
+                            <img src="../assets/icons/paciente.webp" alt="Pacientes">
+                        </picture>
+                        <span>Pacientes</span>
+                    </li>
+                    <li class="menu--list-item">
+                        <picture class="icon">
+                            <img src="../assets/icons/consulta.webp" alt="Consultas">
+                        </picture>
+                        <span>Consultas</span>
+                    </li>
+                    <li class="menu--list-item">
+                        <picture class="icon">
+                            <img src="../assets/icons/usuarios.webp" alt="Usuarios">
+                        </picture>
+                        <span>Usuarios</span>
+                    </li>
+                    <li class="menu--list-item">
+                        <picture class="icon">
+                            <img src="../assets/icons/configuraciones.webp" alt="configuraciones">
+                        </picture>
+                        <span>Configuraciones</span>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="board">
+            <header class="board--header">
+                <div class="logOut" id="logout">
+                    <picture>
+                        <img src="../assets/icons/cerrar-sesion.webp" alt="logOut">
+                    </picture>
+                </div>
+            </header>
+
+            <div id="Inicio" class="patienten-wrapper">
+                <h1>Pacientes</h1>
+                <div class="patienten-header">
+                    <div id="patientForm">
+                        <label for="patientId">Número de Identificación del Paciente:</label>
+                        <input type="text" id="patientId" name="patientId" required>
+                    </div>
+                    <div class="patienten-wrapper--btn">
+                        <button
+                            id="new-patienten"
+                            class="btns">Nuevo Paciente</button>
+                        <button type="button" class="btns" id="searchPatientButton">Buscar o Registrar</button>
+                        <button id="delete-btn" class="btns">Eliminar Paciente</button>
+                        <button type="button" class="btns" id="deletePatientsButton" >Borrar Todos</button>
+                    </div>
+                </div>
+                <table class="patienten-table">
+                    <thead class="patienten-table__header">
+                        <tr class="patienten-table__row">
+                            <th class="patienten-table__header-cell">ID</th>
+                            <th class="patienten-table__header-cell">Nombre</th>
+                            <th class="patienten-table__header-cell">Correo</th>
+                            <th class="patienten-table__header-cell">Número</th>
+                            <th class="patienten-table__header-cell">Historia Clínica</th>
+                        </tr>
+                    </thead>
+                    <tbody class="patienten-table__body">
+                        <tr class="patienten-table__row">
+                            <td class="patienten-table__cell">1</td>
+                            <td class="patienten-table__cell">Juan Pérez</td>
+                            <td class="patienten-table__cell">juan@example.com</td>
+                            <td class="patienten-table__cell">+123456789</td>
+                            <td class="patienten-table__cell">HC12345</td>
+                        </tr>
+                        <tr class="patienten-table__row">
+                            <td class="patienten-table__cell">2</td>
+                            <td class="patienten-table__cell">María López</td>
+                            <td class="patienten-table__cell">maria@example.com</td>
+                            <td class="patienten-table__cell">+987654321</td>
+                            <td class="patienten-table__cell">HC67890</td>
+                        </tr>
+                        <!-- Más filas de pacientes -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="Consultas" class="calendar-container" style="display: none;">
+                <h2 class="calendar-container--title" id="currentMonthYear"></h2>
+
+                <div class="calendar-grid">
+                    <div class="day">Dom</div>
+                    <div class="day">Lun</div>
+                    <div class="day">Mar</div>
+                    <div class="day">Mié</div>
+                    <div class="day">Jue</div>
+                    <div class="day">Vie</div>
+                    <div class="day">Sáb</div>
+                </div>
+                <div id="calendarDates" class="calendar-grid"></div>
+
+                <div class="calendar-header">
+                    <button id="prevMonthBtn" class="btns">Anterior</button>
+                    <button id="nextMonthBtn" class="btns">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- modales -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Registrar Nuevo Paciente</h2>
+                <span id="close-modal-btn" class="close">&times;</span>
+            </div>
+    
+            <div class="modal-body">
+                <div class="progress-bar-container">
+                    <div id="progress-circle" class="progress-circle">
+                        <!-- Progreso circular -->
+                    </div>
+                    <div class="progress-line">
+                        <!-- Barra de progreso -->
+                        <div class="circle active"></div>
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </div>
+    
+                <!-- Formulario -->
+                <form id="register" class="patient-form">
+                    <h3>Ficha de Identificación</h3>
+                    <div id="forms-wrapper">
+                        <div class="form-step active" id="step-1">
+        
+                            <div class="form-group">
+                                <label for="codigo">Código</label>
+                                <input type="text" id="codigo" name="codigo" required>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="name">Nombre</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edad">Edad</label>
+                                <input type="number" id="edad" name="edad" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Celular</label>
+                                <input type="text" id="phone" name="phone" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Correo</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="lugar-nacimiento">Lugar de Nacimiento</label>
+                                <input type="text" id="lugar-nacimiento" name="lugar-nacimiento" required>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="carrera">Carrera</label>
+                                <select id="carrera" name="carrera" required>
+                                    <option value="" disabled selected>Seleccionar Carrera</option>
+                                    <option value="IDC">Ing. Biomedica con enfasis en creaturas mitológicas</option>
+                                    <option value="IDC">Ing. Desarrollo Comunitario</option>
+                                    <option value="IGEM">Ing. Gestión Empresarial</option>
+                                    <option value="ISC">Ing. Sistemas Computacionales</option>
+                                    <option value="IDC">Ing. Pavimentación Espacial</option>
+                                    <option value="IDC">Ing. Amaestramiento de ponis salvajes</option>
+                                    <option value="IDC">Ing. Sonidos Agropecuarios</option>
+                                    <option value="IDC">Ing. Maternidad de gallinas</option>
+                                    <option value="IDC">Ing. Herramientas para cazar ponis</option>
+                                </select>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                                <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="domicilio">Domicilio</label>
+                                <input type="text" id="domicilio" name="domicilio" required>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="estado-civil">Estado Civil</label>
+                                <select id="estado-civil" name="estado-civil" required>
+                                    <option value="" disabled selected>Seleccionar Estado Civil</option>
+                                    <option value="soltero">Soltero</option>
+                                    <option value="casado">Casado</option>
+                                    <option value="divorciado">Divorciado</option>
+                                </select>
+                            </div>
+        
+                            <div class="form-group">
+                                <label for="religion">Religión</label>
+                                <input type="text" id="religion" name="religion" required>
+                            </div>
+                        </div>
+    
+                        <div class="form-step" id="step-2">
+                            <div class="form-group">
+                                <label for="rh">RH</label>
+                                <input type="text" id="rh" name="rh" placeholder="Ingrese su RH">
+                            </div>
+                            <div class="form-group">
+                                <label for="enfermedades-base">Enfermedades de base</label>
+                                <input type="text" id="enfermedades-base" name="enfermedades-base" placeholder="Enfermedades de base">
+                            </div>
+                            <div class="form-group">
+                                <label for="alergico">Alérgico a medicamentos</label>
+                                <input type="text" id="alergico" name="alergico" placeholder="Alergias">
+                            </div>
+                            <div class="form-group">
+                                <label for="tratamientos-medicos">Tratamientos médicos</label>
+                                <input type="text" id="tratamientos-medicos" name="tratamientos-medicos" placeholder="Tratamientos actuales">
+                            </div>
+                            <div class="form-group">
+                                <label for="contacto-emergencia">Contacto de emergencia</label>
+                                <input type="text" id="contacto-emergencia" name="contacto-emergencia" placeholder="Contacto de emergencia">
+                            </div>
+                            <div class="form-group">
+                                <label for="lugar-residencia">Lugar de residencia</label>
+                                <input type="text" id="lugar-residencia" name="lugar-residencia" placeholder="Lugar de residencia">
+                            </div>
+                            <div class="form-group">
+                                <label for="donar-organos">Apto para donar órganos</label>
+                                <select id="donar-organos" name="donar-organos">
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                    <option value="si">Sí</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-step" id="step-3">
+                            <div class="form-group">
+                                <label for="nombre-padre">Nombre del padre</label>
+                                <input type="text" id="nombre-padre" name="nombre-padre" placeholder="Nombre del padre">
+                            </div>
+                            <div class="form-group">
+                                <label for="nombre-madre">Nombre de la madre</label>
+                                <input type="text" id="nombre-madre" name="nombre-madre" placeholder="Nombre de la madre">
+                            </div>
+                            <div class="form-group">
+                                <label for="ocupacion-familiar">Ocupación</label>
+                                <input type="text" id="ocupacion-familiar" name="ocupacion-familiar" placeholder="Ocupación de los padres">
+                            </div>
+                            <div class="form-group">
+                                <label for="antecedentes-familiares">Antecedentes médicos familiares</label>
+                                <input type="text" id="antecedentes-familiares" name="antecedentes-familiares" placeholder="Antecedentes médicos familiares">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Botones para navegar entre formularios -->
+                    <div class="modal-footer">
+                        <button type="button" id="prev-btn" class="btns" disabled>Atrás</button>
+                        <button type="button" id="next-btn" class="btns">Siguiente</button>
+                        <button type="submit" value="Submit" id="submit-btn" class="btns hidden">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-delete" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Eliminar paciente</h2>
+                <span id="close-modal-delete" class="close">&times;</span>
+            </div>
+    
+            <div class="modal-body">
+                <!-- Formulario -->
+                <form id="delete" class="patient-form">
+                    <div id="patientFormDelete">
+                        <label for="patientDelete">Número de Identificación del Paciente:</label>
+                        <input type="text" id="patientDelete" name="patientDelete" required>
+                    </div>
+                    <!-- Botones para navegar entre formularios -->
+                    <div class="modal-footer">
+                        <button type="button" id="del" class="btns">Eliminar</button>
+                        <button type="button" id="cancel-btn" class="btns">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-consult" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Consulta programada</h2>
+                <span id="close-modal-consult" class="close">&times;</span>
+            </div>
+    
+            <div class="modal-body">
+                <table class="patienten-table">
+                    <thead class="patienten-table__header">
+                        <tr class="patienten-table__row">
+                            <th class="patienten-table__header-cell">ID</th>
+                            <th class="patienten-table__header-cell">Nombre</th>
+                            <th class="patienten-table__header-cell">Correo</th>
+                            <th class="patienten-table__header-cell">Número</th>
+                            <th class="patienten-table__header-cell">Historia Clínica</th>
+                            <th class="patienten-table__header-cell">Fecha de la cita</th>
+                            <th class="patienten-table__header-cell">Estado</th>
+                            <th class="patienten-table__header-cell">Pago</th>
+                        </tr>
+                    </thead>
+                    <tbody class="patienten-table__body">
+                        <tr class="patienten-table__row">
+                            <td class="patienten-table__cell">1</td>
+                            <td class="patienten-table__cell">Juan Pérez</td>
+                            <td class="patienten-table__cell">juan@example.com</td>
+                            <td class="patienten-table__cell">+123456789</td>
+                            <td class="patienten-table__cell">HC12345</td>
+                            <td class="patienten-table__cell">06/06/2026</td>
+                            <td class="patienten-table__cell">Confirmado</td>
+                            <td class="patienten-table__cell">Pendiente</td>
+                        </tr>
+                        <tr class="patienten-table__row">
+                            <td class="patienten-table__cell">2</td>
+                            <td class="patienten-table__cell">Enfermo Matasano</td>
+                            <td class="patienten-table__cell">lapalida@example.com</td>
+                            <td class="patienten-table__cell">+57313131313</td>
+                            <td class="patienten-table__cell">HC12346</td>
+                            <td class="patienten-table__cell">09/09/2029</td>
+                            <td class="patienten-table__cell">Confirmado</td>
+                            <td class="patienten-table__cell">Confirmado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

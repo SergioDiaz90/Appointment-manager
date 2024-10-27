@@ -1,0 +1,534 @@
+/*Variables*/
+:root {
+    --var-fullW: 100%;
+    --var-fullH: 100%;
+    --var-fullWS: 100vw;
+    --var-fullHS: 100vh;
+    --var-full-width: 100vw;
+    --var-height-header: 70px;
+    --var-height-menu-items: 30px;
+    --var-size-icon-menu: 20px;
+    --var-margin-icon-menu: 0 20px 0 0;
+    --var-padding-menu: 0 10px;
+    --var-size-logout: 40px;
+
+    --var-color-blue: #003c69;
+    --var-color-white: white;
+    --var-color-border: 1px solid black;
+    --var-color-hover: #1e6eb5;
+    --var-color-shadow: 0px 0px 7px black;
+}
+
+* {
+    clear: both;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('../assets/img/Fondo.jpg');
+    background-size: cover; /* Cubre toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* No repetir la imagen */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    opacity: 0.9; /* Opcional: añade un poco de transparencia */
+}
+
+/* Contenedor principal */
+.container {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Logo */
+.logo {
+    display: block;
+    margin: 0 auto 20px; /* Centra el logo y añade espacio debajo */
+    max-width: 100px; /* Ajusta el tamaño máximo del logo */
+}
+
+/* Títulos */
+h1, h2 {
+    text-align: center;
+}
+
+/* Formulario de inicio de sesión */
+#loginSection {
+    margin-bottom: 20px;
+}
+
+/* Etiquetas y campos de entrada */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+/* Botones */
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Mensajes de confirmación */
+#loginMessage {
+    margin-top: 15px;
+    font-size: 1em;
+    color: #333;
+    padding: 10px;
+    background-color: #e7f3e7;
+    border-left: 5px solid #4CAF50;
+    border-radius: 4px;
+}
+
+/*Sección dashboard*/
+
+.dashboard {
+    display: none;
+    background-color: var(--var-color-white);
+    width: var(--var-fullW);
+    height: var(--var-fullHS);
+}
+
+.menu {
+    width: 30%;
+    height: var(--var-fullHS);
+    padding: var(--var-padding-menu);
+    background: var(--var-color-white);
+    box-shadow: var(--var-color-shadow);
+}
+
+.menu--profileImg {
+    margin: 0 0 20px 0;
+}
+
+.menu--profileImg picture {
+    width: 200px;
+}
+
+.menu--profileImg picture img {
+    width: var(--var-fullW);
+}
+
+.menu--list ul{
+    list-style: none;
+    cursor: pointer;
+}
+
+.menu--list ul .menu--list-item {
+    display: flex;
+    align-items: center;
+    height: var(--var-height-menu-items);
+    border-bottom: var(--var-color-border);
+}
+
+.menu--list ul .menu--list-item:hover {
+    background-color: var(--var-color-hover);
+    color: var(--var-color-white);
+}
+
+.menu--list ul li .icon {
+    width: var(--var-size-icon-menu);
+    height: var(--var-size-icon-menu);
+    margin: var(--var-margin-icon-menu);
+}
+
+.menu--list ul li .icon > img {
+    width: var(--var-fullW);
+}
+
+.board {
+    width: var(--var-fullW);
+    height: var(--var-fullHS);
+}
+
+.board .board--header {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: var(--var-fullW);
+    height: var(--var-height-header);
+    background: var(--var-color-blue);
+}
+
+.board--header .logOut {
+    width: var(--var-size-logout);
+    height: var(--var-size-logout);
+    margin: 0 20px;
+    cursor: pointer;
+}
+
+.board--header .logOut img {
+    width: var(--var-fullW);
+    height: var(--var-fullH);
+}
+
+/*Vista de pacientes*/
+
+.patienten-wrapper {
+    overflow-x: auto;
+}
+
+.patienten-wrapper--btn {
+    width: var(--var-fullW);
+    display: flex;
+    margin: 20px 0;
+}
+
+.patienten-wrapper--btn .btns{
+    width: 200px;
+    height: 50px;
+    border: none;
+    background: var(--var-color-blue);
+    color: var(--var-color-white);
+    margin: 0 20px 0 0;
+}
+
+.patienten-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.patienten-table__header-cell,
+.patienten-table__cell {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+
+/* Responsive design para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .patienten-table__header-cell,
+    .patienten-table__cell {
+        display: block;
+        width: 100%;
+    }
+    
+    .patienten-table__row {
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    .patienten-table__header-cell {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+}
+
+/*Modales*/
+
+/* Modal */
+/* Estilos del modal */
+
+/* General Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: var(--var-fullW);
+    height: var(--var-fullH);
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.active {
+    display: grid;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 90%;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.close {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Barra de progreso con interactividad */
+.progress-bar-container {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.progress-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    position: relative;
+}
+
+.progress-line::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: #ccc;
+    z-index: 1;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border: 3px solid #4caf50;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.circle.active {
+    background-color: #4caf50;
+}
+
+.circle span {
+    font-size: 1.2em;
+    color: white;
+}
+
+.circle:not(.active) span {
+    color: #4caf50;
+}
+
+/* Formulario */
+.patient-form{
+    width: 100%;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.btns {
+    width: 200px;
+    height: 70px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 20px;
+}
+
+.btns:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.hidden {
+    display: none;
+}
+
+.hidden.active {
+    display: block;
+}
+
+/* Progreso circular */
+.progress-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: conic-gradient(#4caf50 50%, #ccc 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-circle.active {
+    background: conic-gradient(#4caf50 100%, #ccc 0%);
+}
+
+/*Calendario*/
+.calendar-container {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.calendar-container--title {
+    margin-bottom: 50px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.calendar-header button:hover {
+    background-color: #0056b3;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-header button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.calendar-header button:hover {
+    background-color: #0056b3;
+}
+
+.calendar-grid {
+    display: grid;
+    /* grid-template-columns: repeat(7, 1fr); */
+    grid-template:
+        "Domingo Lunes Martes Miercoles Jueves Viernes Sábado"
+        "Domingo Lunes Martes Miercoles Jueves Viernes Sábado"
+        "Domingo Lunes Martes Miercoles Jueves Viernes Sábado"
+        "Domingo Lunes Martes Miercoles Jueves Viernes Sábado"
+        "Domingo Lunes Martes Miercoles Jueves Viernes Sábado";
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.day, .date {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.day {
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+}
+
+.date {
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.date.today {
+    background-color: #007bff;
+    color: white;
+}
+
+.calendar-footer {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
